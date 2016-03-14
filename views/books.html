@@ -1,0 +1,25 @@
+<div ng-controller="BookController" class="container">
+	<div class="jumbotron">
+		Books
+		<table class="table table-striped" >
+			<tr class="text-center">
+				<th>Título</th>
+				<th>Autor</th>
+				<th>Sinopse</th>
+				<th>Capa</th>
+				<th>Preço</th>
+			</tr>
+			<ul>
+			<tr ng-repeat="book in db">
+				<td>{{book.title}}</td>
+				<td ng-repeat="author in book.authors"> 
+					{{author}}
+				</td>
+				<td>{{book.sinopse}}</td>
+				<td>{{book.imageUrl}}</td>
+				<td>{{book.price}}</td>
+			</tr>
+		</table>
+		
+	</div>
+</div>
