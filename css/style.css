@@ -8,3 +8,12 @@
 .table-title > th{
 	text-align: center;
 }
+
+.table tr td img {
+	width:100px; 
+	height:70px;
+}
+
+.align-content{
+	vertical-align: middle !important;
+}

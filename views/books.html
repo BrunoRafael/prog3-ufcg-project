@@ -1,6 +1,6 @@
 <div ng-controller="BookController" class="container">
 	<div class="jumbotron">
-		Books
+		<h2>Livros</h2>
 		<table class="table table-striped" >
 			<tr class="table-title">
 				<th>Título</th>
@@ -8,18 +8,25 @@
 				<th>Sinopse</th>
 				<th>Capa</th>
 				<th>Preço</th>
+				<th></th>
 			</tr>
 			<ul>
-			<tr ng-repeat="book in db">
-				<td>{{book.title}}</td>
-				<td ng-repeat="author in book.authors"> 
-					{{author}}
+			<tr ng-repeat="book in books">
+				<td class="align-content">{{book.title}}</td>
+				<td class="align-content">
+					<div ng-repeat="author in book.authors">
+						{{author}}
+					</div> 
 				</td>
-				<td>{{book.sinopse}}</td>
-				<td>{{book.imageUrl}}</td>
-				<td>{{book.price}}</td>
+				<td class="align-content">{{book.sinopse}}</td>
+				<td class="align-content"><img src={{book.imgUrl}}></td>
+				<td class="align-content">
+					R${{book.price}}
+				</td>
+				<td>
+					<div class="row"><i class="material-icons">clear</i>
+				</td>
 			</tr>
 		</table>
-		
 	</div>
 </div>
