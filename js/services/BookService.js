@@ -1,26 +1,31 @@
 (function(){
 	app.factory('BookService', function($http, URL){
 		return {
-			getAllBooks : getAllBooks,
-			getBook: getBook,
-			addBook: addBook,
-			updateBook: updateBook,
+			getAll : getAll,
+			get: get,
+			add: add,
+			remove: remove,
+			update: update,
 			addComment: addComment
 		}
 
-		function getAllBooks(){
-			return $http.get(URL.allBooks_url);
+		function getAll(){
+			return $http.get(URL.ALL_BOOKS_URL);
 		}
 
-		function getBook(bookId){
-
-		}
-
-		function addBook(book){
+		function get(bookId){
 
 		}
 
-		function updateBook(newBook){
+		function add(book){
+
+		}
+
+		function remove(bookId){
+			return $http.delete(URL.REMOVE_BOOK + '/' + bookId);
+		}
+
+		function update(newBook){
 
 		}
 

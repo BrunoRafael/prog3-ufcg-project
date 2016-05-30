@@ -1,13 +1,15 @@
 (function(){
-	const server_url= "http://localhost",
-		  port= 8080,
-		  libraryc3po_url= server_url + ":" + port,
-		  allBooks_url= libraryc3po_url + "/books"
+	const SERVER_URL= "http://localhost",
+		  PORT= 8080,
+		  LIBRARYC3PO_URL= SERVER_URL + ":" + PORT,
+		  ALL_BOOKS_URL= LIBRARYC3PO_URL + "/books",
+		  REMOVE_BOOK  = ALL_BOOKS_URL + '/remove'
 
 	app.constant("URL", {
-		server_url: server_url,
-		port: port,
-		libraryc3po_url: libraryc3po_url,
-		allBooks_url: allBooks_url
+		SERVER_URL: SERVER_URL,
+		PORT: PORT,
+		LIBRARYC3PO_URL: LIBRARYC3PO_URL,
+		ALL_BOOKS_URL: ALL_BOOKS_URL,
+		REMOVE_BOOK : REMOVE_BOOK
 	});
 })();

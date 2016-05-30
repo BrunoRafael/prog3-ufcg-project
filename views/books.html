@@ -1,6 +1,7 @@
-<div ng-controller="BookController" class="container">
+<div ng-controller="BookCtrl" class="container">
 	<div class="jumbotron">
 		<h2>Livros</h2>
+		<div ng-click="goTo('/count')"><button>counter</button></div>
 		<table class="table table-striped" >
 			<tr class="table-title">
 				<th>Título</th>
@@ -19,14 +20,36 @@
 					</div> 
 				</td>
 				<td class="align-content">{{book.sinopse}}</td>
-				<td class="align-content"><img src={{book.imgUrl}}></td>
+				<td class="align-content"><img ng-src={{book.imgUrl}}></td>
 				<td class="align-content">
 					R${{book.price}}
 				</td>
 				<td>
-					<div class="row"><i class="material-icons">clear</i>
+					<div ng-controller="PopupCtrl" class="row">
+						<md-button ng-click="showConfirm($event, book.bookId, removeBookCallback)" >
+	      					<i class="material-icons">clear</i>
+	    				</md-button>
+						<!--<a ng-click="openConfirm()"><i class="material-icons">clear</i></a>-->
+					</div>
 				</td>
 			</tr>
 		</table>
+		<md-button class="md-fab" aria-label="add">
+        	<md-icon class="material-icons">add</md-icon>
+        </md-button>
 	</div>
 </div>
+
+<dialog  ng-controler="PopupCtrl" id="confirmRemove" class="mdl-dialog">
+  <h3 class="mdl-dialog__title">MDL Dialog</h3>
+  <div class="mdl-dialog__content">
+    <p>
+      This is an example of the Material Design Lite dialog component.
+      Please use responsibly.
+    </p>
+  </div>
+  <div class="mdl-dialog__actions">
+    <button type="button" class="mdl-button">Close</button>
+    <button type="button" class="mdl-button" disabled>Disabled action</button>
+  </div>
+</dialog>

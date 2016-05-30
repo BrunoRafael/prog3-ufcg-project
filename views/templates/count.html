@@ -1,0 +1,10 @@
+<div ng-controller="CountCtrl">
+	<div class="jumbotron">
+	<button ng-click="goTo('/books')"> back </button>
+		<h1> {{actualTime}} </h1>
+		<input id="input-timer" type="number" ng-model="timer" placeholder="Tempo em segundos"/>
+		<button ng-click="start(timer)">start</button>
+		<button ng-click="pause()">pause</button>
+		<button ng-click="stop(); timer=undefined;">stop</button>
+	</div>
+</div>

@@ -1,13 +1,27 @@
-var states = {
+var state = {
 	books: {
+		url: '/books',
 		templateUrl: 'views/books.html',
-		controller: 'BookController as bookCtrl',
+		controller: 'BookCtrl',
+		windowClass: 'center-modal'
+	}, 
+	counting: {
+		url: '/count',
+		templateUrl: 'views/templates/count.html',
+		controller: 'CountCtrl'
 	}
 };
 
-app.config(['$routeProvider', function($routeProvider){
-	$routeProvider.when('/books', states.books).
-	otherwise({redirectTo:'/books'});
-}]);
+app.config(function($stateProvider, $urlRouterProvider){
+	$stateProvider.
+	state('/books', state.books).
+	state('/count', state.counting);
+	
+	$urlRouterProvider.otherwise('/books');
+}).run(function($rootScope, $state){
+	$rootScope.goTo = function (state, params) {
+      $state.go(state, params);
+    };
+});
 
 app.run(function($rootScope){});

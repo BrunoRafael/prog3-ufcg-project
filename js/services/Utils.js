@@ -1,3 +1,7 @@
 app.factory('Utils', function(){
-	return {}
+	return {
+		templates: {
+			confirmPopup : 'views/templates/confirm-popup.html'
+		}
+	}
 });
