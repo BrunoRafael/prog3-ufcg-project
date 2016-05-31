@@ -12,12 +12,13 @@ var state = {
 	}
 };
 
-app.config(function($stateProvider, $urlRouterProvider){
+app.config(function($stateProvider, $httpProvider, $urlRouterProvider){
 	$stateProvider.
 	state('/books', state.books).
 	state('/count', state.counting);
 	
 	$urlRouterProvider.otherwise('/books');
+	$httpProvider.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 }).run(function($rootScope, $state){
 	$rootScope.goTo = function (state, params) {
       $state.go(state, params);
