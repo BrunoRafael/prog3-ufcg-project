@@ -1,14 +1,20 @@
-var express  = require('express');
-var app      = express();
-var morgan = require('morgan');
-var bodyParser = require('body-parser');
+var express = require('express');
+var app = express();
 
-// configuration =================
+// set the port of our application
+// process.env.PORT lets the port be set by Heroku
+var port = process.env.PORT || 3080;
 
-app.use(express.static(__dirname + '/public')); 
-app.use(morgan('dev'));
-app.use(bodyParser.urlencoded({'extended':'true'})); 
-app.use(bodyParser.json());
+// make express look in the public directory for assets (css/js/img)
+app.use(express.static(__dirname + '/public'));
 
-app.listen(3080);
-console.log("App listening on port 3080");
+// set the home page route
+app.get('/', function(req, res) {
+
+    // ejs render automatically looks in the views folder
+    res.render('index');
+});
+
+app.listen(port, function() {
+    console.log('Our app is running on http://localhost:' + port);
+});
