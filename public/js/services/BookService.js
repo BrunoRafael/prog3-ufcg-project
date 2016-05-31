@@ -18,7 +18,7 @@
 		}
 
 		function save(book){
-			return $http.post(URL.ADD_BOOK, book);
+			return $http.post(URL.ADD_BOOK, {book: book});
 		}
 
 		function remove(bookId){

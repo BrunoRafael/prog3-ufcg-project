@@ -27,8 +27,7 @@ app.controller('PopupCtrl', function($scope, $mdDialog, BookService){
       controller: 'RegisterBookCtrl',
       templateUrl: '../../../views/templates/form-template.html',
       parent: angular.element(document.body),
-      targetEvent: ev,
-      clickOutsideToClose:true,
+      targetEvent: ev
     });
-  }
-})
+  };
+});

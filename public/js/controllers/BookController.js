@@ -1,4 +1,4 @@
-app.controller('BookCtrl', function($scope, BookService, Utils){
+app.controller('BookCtrl', function($rootScope, $scope, BookService){
 	function init(){
 		BookService.getAll().then(function(books){
 			$scope.books = books.data;
@@ -16,7 +16,13 @@ app.controller('BookCtrl', function($scope, BookService, Utils){
 				$scope.books.splice(i, 1);
 			}
 		}
-	}
+	};
+
+	$rootScope.$on('bookSaved', function(status,books){
+		for(var i in books){
+			$scope.books.unshift(books[i]);
+		}
+	});
 
 	init();
 });
