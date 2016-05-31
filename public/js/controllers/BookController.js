@@ -1,10 +1,8 @@
 app.controller('BookCtrl', function($rootScope, $scope, BookService){
-	function init(){
-		BookService.getAll().then(function(books){
-			$scope.books = books.data;
-			$scope.$applyAsync();
-		});
-	}
+	BookService.getAll().then(function(books){
+		$scope.books = books.data;
+		$scope.$applyAsync();
+	});
 
 	$scope.addBook = function(book){
 		BookService.add(book);
@@ -23,6 +21,4 @@ app.controller('BookCtrl', function($rootScope, $scope, BookService){
 			$scope.books.unshift(books[i]);
 		}
 	});
-
-	init();
 });

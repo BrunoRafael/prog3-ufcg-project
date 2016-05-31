@@ -2,7 +2,6 @@
 	app.factory('BookService', function($http, URL){
 		return {
 			getAll : getAll,
-			get: get,
 			save: save,
 			remove: remove,
 			update: update,
@@ -10,11 +9,11 @@
 		}
 
 		function getAll(){
-			return $http.get(URL.ALL_BOOKS_URL);
-		}
-
-		function get(bookId){
-
+			return $http.get(URL.ALL_BOOKS_URL, {headers: {
+				"Access-Control-Allow-Origin" : "Origin, X-Requested-With, Content-Type, Accept",
+				"Access-Control-Allow-Methods" : "GET,POST,PUT,DELETE,OPTIONS",
+				"Access-Control-Allow-Headers": "*"
+			}});
 		}
 
 		function save(book){
