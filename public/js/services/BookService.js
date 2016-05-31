@@ -3,7 +3,7 @@
 		return {
 			getAll : getAll,
 			get: get,
-			add: add,
+			save: save,
 			remove: remove,
 			update: update,
 			addComment: addComment
@@ -17,8 +17,8 @@
 
 		}
 
-		function add(book){
-
+		function save(book){
+			return $http.post(URL.ADD_BOOK, book);
 		}
 
 		function remove(bookId){

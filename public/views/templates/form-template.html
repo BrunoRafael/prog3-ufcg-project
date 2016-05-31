@@ -1,0 +1,41 @@
+<div class="book-register" layout="column" layout-padding ng-cloak>
+  <h2> Adicionar novo livro</h2>
+  <br/>
+  <md-content class="md-no-momentum">
+    <md-input-container class="md-icon-float md-block">
+      <!-- Use floating label instead of placeholder -->
+      <label>Título (obrigatório)</label>
+      <input ng-model="book.name" type="text" ng-required="true">
+    </md-input-container>
+    <md-input-container md-no-float class="md-block">
+      <input ng-model="book.authors" type="text" placeholder="Autores">
+    </md-input-container>
+    <md-input-container class="md-block">
+      <!-- Use floating placeholder instead of label -->
+      <label>Preço (obrigatório)</label>
+      <input ng-model="book.price" type="text" ng-required="true">
+    </md-input-container>
+    <md-input-container md-no-float class="md-block">
+      <input ng-model="book.imgUrl" type="text" placeholder="Url para a capa do livro" >
+    </md-input-container>
+    <md-input-container class="md-icon-float md-icon-right md-block">
+      <label>Sinopse</label>
+      <textarea ng-model="book.description"></textarea>
+    </md-content>
+    <section layout="row" layout-sm="column" layout-align="center center" layout-wrap>
+      <md-button ng-click="save(book)" class="md-raised md-primary">
+        <md-tooltip>
+            Salvar cadastro
+        </md-tooltip>
+        SALVAR
+      </md-button>
+
+      <md-button ng-click="close()" class="md-raised">
+        <md-tooltip>
+          Cancelar cadastro
+        </md-tooltip>
+        CANCELAR
+      </md-button>
+    </section>
+
+</div>

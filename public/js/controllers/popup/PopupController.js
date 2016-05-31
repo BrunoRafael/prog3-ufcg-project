@@ -21,4 +21,14 @@ app.controller('PopupCtrl', function($scope, $mdDialog, BookService){
       console.log('canceled!');
     });
   };
+
+  $scope.showAddBookForm = function(ev){
+    $mdDialog.show({
+      controller: 'RegisterBookCtrl',
+      templateUrl: '../../../views/templates/form-template.html',
+      parent: angular.element(document.body),
+      targetEvent: ev,
+      clickOutsideToClose:true,
+    });
+  }
 })
