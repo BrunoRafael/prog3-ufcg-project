@@ -1,5 +1,5 @@
 (function(){
-	const LIBRARYC3PO_URL= "http://localhost:8080",
+	const LIBRARYC3PO_URL= "https://prog3-server.appspot.com",
 		  ALL_BOOKS_URL= LIBRARYC3PO_URL + "/books",
 		  REMOVE_BOOK  = ALL_BOOKS_URL + '/remove',
 		  ADD_BOOK = ALL_BOOKS_URL + '/add/book';
