@@ -1,7 +1,9 @@
 var express = require('express');
 var app = express();
+var cors = require('cors');
 
 app.use(express.static(__dirname + '/public'));
+app.use(cors());
 
 app.get('/', function(req, res){
   res.redirect('/index.html');

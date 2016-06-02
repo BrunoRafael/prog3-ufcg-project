@@ -5,14 +5,15 @@ app.controller('RegisterBookCtrl', function($rootScope, $scope, $mdDialog, BookS
 
 	$scope.save = function(ev, book){
 		console.log(book);
-		book.authors = book.authors.split(',');
-		for(var i in book.authors){
-			if(book.authors[i].trim() ==  ""){
-				book.authors.splice(i, 1);
+		var bookCopy = angular.copy(book);
+		bookCopy.authors = bookCopy.authors.split(',');
+		for(var i in bookCopy.authors){
+			if(bookCopy.authors[i].trim() ==  ""){
+				bookCopy.authors.splice(i, 1);
 			}
-			book.authors[i] = book.authors[i].trim();
+			bookCopy.authors[i] = bookCopy.authors[i].trim();
 		}
-		BookService.save(book).then(function() {
+		BookService.save(bookCopy).then( function() {
 			$scope.close();
 			$mdDialog.show(
 					$mdDialog.alert()
@@ -22,7 +23,7 @@ app.controller('RegisterBookCtrl', function($rootScope, $scope, $mdDialog, BookS
 							.targetEvent(ev)
 							.ok('Fechar'));
 			$rootScope.$broadcast('bookSaved', [book]);
-		}).catch(function(){
+		}).catch( function(exception){
 			$scope.close();
 			$mdDialog.show(
 					$mdDialog.alert()

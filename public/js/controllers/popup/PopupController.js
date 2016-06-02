@@ -22,6 +22,11 @@ app.controller('PopupCtrl', function($scope, $mdDialog, BookService){
     });
   };
 
+    /*
+     locals: {
+     book: $scope.items
+     },
+     */
   $scope.showAddBookForm = function(ev){
     $mdDialog.show({
       controller: 'RegisterBookCtrl',

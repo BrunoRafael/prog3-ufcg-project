@@ -1,6 +1,6 @@
 app.controller('BookCtrl', function($rootScope, $scope, BookService){
-	BookService.getAll().then(function(books){
-		$scope.books = books.data;
+	BookService.getAll(function(books){
+		$scope.books = books;
 		$scope.$applyAsync();
 	});
 

@@ -8,15 +8,22 @@
 			addComment: addComment
 		}
 
-		function getAll(){
-			return $http.get(URL.ALL_BOOKS_URL, {headers: {
-				"Access-Control-Allow-Origin" : "Origin, X-Requested-With, Content-Type, Accept",
-				"Access-Control-Allow-Methods" : "GET,POST,PUT,DELETE,OPTIONS",
-				"Access-Control-Allow-Headers": "*"
-			}});
+		function getAll(successCallback, errorCallback){
+			$.ajax({
+				type: 'GET',
+				url: URL.ALL_BOOKS_URL,
+				crossDomain: true,
+				dataType: 'json',
+				success: function(data) {
+					successCallback(data)
+				},
+				error: function (ex) {
+					errorCallback(ex)
+				}
+			});
 		}
 
-		function save(book){
+		function save(book, successCallback, errorCallback){
 			return $http.post(URL.ADD_BOOK, {book: book});
 		}
 

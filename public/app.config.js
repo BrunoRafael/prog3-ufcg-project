@@ -18,7 +18,7 @@ app.config(function($stateProvider, $httpProvider, $urlRouterProvider){
 	state('/count', state.counting);
 	
 	$urlRouterProvider.otherwise('/books');
-	$httpProvider.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
+	//$httpProvider.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
 }).run(function($rootScope, $state){
 	$rootScope.goTo = function (state, params) {
       $state.go(state, params);
