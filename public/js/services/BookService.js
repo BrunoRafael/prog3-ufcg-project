@@ -18,7 +18,9 @@
 					successCallback(data)
 				},
 				error: function (ex) {
-					errorCallback(ex)
+					if(errorCallback){
+						errorCallback(ex)
+					}
 				}
 			});
 		}
@@ -32,7 +34,7 @@
 		}
 
 		function update(newBook){
-
+			return $http.put(URL.UPDATE_BOOK + '/book'), {book: newBook};
 		}
 
 		function addComment(bookId, comment){

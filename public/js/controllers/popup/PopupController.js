@@ -8,11 +8,12 @@ app.controller('PopupCtrl', function($scope, $mdDialog, BookService){
           .ok('Confirmar')
           .cancel('Cancelar');
 
+
     $mdDialog.show(confirm).then(function() {
       console.log('removed!');
       BookService.remove(bookId).then(function(id){
         console.log(id);
-          removeBookCallback(bookId);
+        removeBookCallback(bookId);
       }).catch(function(exception){
           console.log('error');
         });
@@ -27,12 +28,31 @@ app.controller('PopupCtrl', function($scope, $mdDialog, BookService){
      book: $scope.items
      },
      */
-  $scope.showAddBookForm = function(ev){
-    $mdDialog.show({
-      controller: 'RegisterBookCtrl',
-      templateUrl: '../../../views/templates/form-template.html',
-      parent: angular.element(document.body),
-      targetEvent: ev
-    });
-  };
+    $scope.showAddBookForm = function(ev){
+        $mdDialog.show({
+            controller: 'RegisterBookCtrl',
+            templateUrl: '../../../views/templates/form-template.html',
+            parent: angular.element(document.body),
+            targetEvent: ev,
+            locals:{
+                book: undefined,
+                execute: BookService.save
+            }
+        });
+    };
+
+    $scope.showUpdateBook = function(ev, book, callback){
+        $mdDialog.show({
+            controller: 'RegisterBookCtrl',
+            templateUrl: '../../../views/templates/form-template.html',
+            parent: angular.element(document.body),
+            targetEvent: ev,
+            locals:{
+                data:{
+                    book: book,
+                    execute : BookService.update
+                }
+            }
+        });
+    };
 });
