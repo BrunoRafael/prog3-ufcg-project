@@ -5,8 +5,9 @@
 			save: save,
 			remove: remove,
 			update: update,
-			addComment: addComment
-		}
+			addComment: addComment,
+			getAllComments: getAllComments
+		};
 
 		function getAll(successCallback, errorCallback){
 			$.ajax({
@@ -25,8 +26,9 @@
 			});
 		}
 
-		function save(book){
-			return $http.post(URL.ADD_BOOK, {book: book});
+		function save(newBook){
+			delete newBook.comments;
+			return $http.post(URL.ADD_BOOK, {book: newBook});
 		}
 
 		function remove(bookId){
@@ -34,11 +36,24 @@
 		}
 
 		function update(newBook){
+			delete newBook.comments;
 			return $http.put(URL.UPDATE_BOOK, {book: newBook});
 		}
 
-		function addComment(bookId, comment){
+		function updateComment(bookId, comment){
+			return $http.put(URL.ADD_COMMENT, {bookId: bookId, comment: comment});
+		}
 
+		function removeComment(bookId, comment){
+			return $http.delete(URL.ADD_COMMENT, {bookId: bookId, comment: comment});
+		}
+
+		function addComment(comment){
+			return $http.post(URL.ADD_COMMENT, {comment: comment});
+		}
+
+		function getAllComments(bookId){
+			return $http.get(URL.GET_ALL_COMMENTS, {params: {bookId: bookId}});
 		}
 	});
 })();

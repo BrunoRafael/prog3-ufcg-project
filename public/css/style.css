@@ -29,6 +29,10 @@
 }
 
 md-dialog {
-	width: 70%;
-	max-height: 90%;
+	width: 40% !important;
+	max-height: 90% !important;
+}
+
+.avatar-comment{
+	margin-top: 0px !important;
 }

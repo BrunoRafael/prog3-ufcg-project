@@ -50,10 +50,29 @@ app.controller('PopupCtrl', function($scope, $rootScope, $mdDialog, BookService)
     };
 
     $scope.showUpdateBook = function(ev, book){
-
         $mdDialog.show({
             controller: 'RegisterBookCtrl',
             templateUrl: '../../../views/templates/form-template.html',
+            parent: angular.element(document.body),
+            targetEvent: ev,
+            locals:{
+                data:{
+                    book: angular.copy(book),
+                    execute : BookService.update,
+                    callback: function(json) {
+                        $mdDialog.cancel();
+                        showFormPopup(ev, json);
+                        $rootScope.$broadcast('bookUpdated', [json.data]);
+                    }
+                }
+            }
+        });
+    };
+
+    $scope.showComments = function(ev, book){
+        $mdDialog.show({
+            controller: 'CommentCtrl',
+            templateUrl: '../../../views/templates/comments-view.html',
             parent: angular.element(document.body),
             targetEvent: ev,
             locals:{

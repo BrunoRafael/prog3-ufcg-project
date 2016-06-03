@@ -11,7 +11,10 @@ var bookSchema = new Schema({
     sinopse: String,
     imgUrl: String,
     authors: [String],
-    comments : [String]
+    comments: [{
+        type: Schema.ObjectId,
+        ref: 'Comment'
+    }]
 });
 
 module.exports = mongoose.model('Book', bookSchema);

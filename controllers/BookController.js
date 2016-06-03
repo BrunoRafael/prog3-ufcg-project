@@ -1,5 +1,8 @@
 var config = require('../config'),
-    Book = require('../models/Book.js');
+    Book = require('../models/Book.js'),
+    Comment = require('../models/Comment.js'),
+    mongoose = require('mongoose');
+
 var successMsg =  'Informações salvas com sucesso.',
     errorMsg = 'Não foi possível salvar os dados.';
 
@@ -68,11 +71,42 @@ exports.update = function(newBook, callback){
     });
 };
 
-exports.addComment = function(bookId, comment){
-    Book.findOneAndUpdate({_id: params.promotion_id}, { $push: { 'comments': vomment }}, { new: true })
-        .then(function(err, comment){
+exports.getComments = function(bookId, callback){
+    Comment.find({bookId: mongoose.Types.ObjectId(bookId)}, function(err, comments){
+        callback(comments);
+    });
+};
 
-        });
+exports.addComment = function(comment, callback){
+    comment.bookId = mongoose.Types.ObjectId(comment.bookId);
+    var newComment = Comment(comment);
+    newComment.save((err, commentSaved) => {
+        if(err){
+            callback({success: true, data: err, msg: errorMsg});
+        } else {
+            callback({success: false, data: commentSaved, msg: successMsg });
+        }
+    });
+};
+
+exports.updateComment = function(comment,  callback){
+    Comment.findOneAndUpdate({_id: comment._id}, comment, {new: true}, function(err, bookSaved){
+        if(err){
+            callback({success: true, data: err, msg: 'Não foi possível atualizar as informações'});
+        }else {
+            callback({success: true, data: bookSaved, msg: successMsg});
+        }
+    });
+};
+
+exports.removeComment = function(commentId, callback){
+    Comment.remove({_id: commentId}, {new:true}, function(err, commentRemoved){
+        if(err){
+            callback({success:false, data: err, msg: 'Não foi possível remover este comentário'})
+        } else {
+            callback({success: true, data:commentRemoved, msg: 'Comentário removido'});
+        }
+    });
 };
 
 exports.cleanDatabase = function(callback){

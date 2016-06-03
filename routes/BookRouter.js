@@ -34,19 +34,35 @@ router.delete('/remove', function(req, res) {
     });
 });
 
+router.get('/getComments', function(req, res){
+    var bookId = req.query.bookId;
+    bookCtrl.getComments(bookId, function(response){
+        res.json(response);
+    });
+});
+
 /*Implementa serviço de requisição de produtos de um determinado estabelecimento. Fazer acontecer com webScoket*/
 router.post('/addComment', function(req, res){
-
+    var comment = req.body.comment;
+    bookCtrl.addComment(comment, function(response){
+        res.json(response);
+    });
 });
 
 /*Implementa serviço de requisição de produtos de um determinado estabelecimento. Fazer acontecer com webScoket*/
-router.post('/editComment', function(req, res){
-
+router.put('/updateComment', function(req, res){
+    var comment = req.body.comment;
+    bookCtrl.addComment(comment, function(response){
+        res.json(response);
+    });
 });
 
 /*Implementa serviço de requisição de produtos de um determinado estabelecimento. Fazer acontecer com webScoket*/
-router.post('/removeComment', function(req, res){
-
+router.delete('/removeComment', function(req, res){
+    var comment = req.query.commentId;
+    bookCtrl.addComment(bookId, comment, userName, function(response){
+        res.json(response);
+    });
 });
 
 router.put('/remove/library', function(req, res){
