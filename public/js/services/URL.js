@@ -1,5 +1,5 @@
 (function(){
-	const LIBRARYC3PO_URL= "http://localhost:3080",
+	const LIBRARYC3PO_URL= "https://prog3-ufcg-project.herokuapp.com:3080",
 		  API_URL = LIBRARYC3PO_URL + '/api',
 		  BOOKS_API_URL= API_URL + '/book',
 		  INDEX_API_URL= API_URL + '/',
