@@ -8,16 +8,16 @@ var config = require('./config');
 var path = require('path');
 var url_conn = '';
 
-if (process.env.PORT) {
+//if (process.env.PORT) {
     url_conn = config.mongo_uri.heroku;
     mongoose.connect(url_conn);
-} else if (process.env.NODE_ENV == 'test') {
+/*} else if (process.env.NODE_ENV == 'test') {
     url_conn = config.mongo_uri.test;
     mongoose.connect(url_conn);
 } else {
     url_conn = config.mongo_uri.dev;
     mongoose.connect(url_conn);
-}
+}*/
 
 var db = mongoose.connection;
 

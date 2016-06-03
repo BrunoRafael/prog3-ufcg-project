@@ -2,6 +2,6 @@
   "mongo_uri": {
     "dev": "mongodb://localhost/libc3po",
     "test": "mongodb://localhost/libc3po-test",
-    "heroku": "mongodb://<BrunoRafael>:<Adh_5842100>@ds027825.mlab.com:27825/libc3podb"
+    "heroku": "mongodb://brunorafael:842100@ds027825.mlab.com:27825/libc3podb"
   }
 }
