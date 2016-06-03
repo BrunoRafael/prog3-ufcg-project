@@ -1,14 +1,20 @@
 (function(){
-	const LIBRARYC3PO_URL= "http://localhost:8080",
-		  ALL_BOOKS_URL= LIBRARYC3PO_URL + "/books",
-		  REMOVE_BOOK  = ALL_BOOKS_URL + '/remove',
-		  UPDATE_BOOK  = ALL_BOOKS_URL + '/update',
-		  ADD_BOOK = ALL_BOOKS_URL + '/add/book';
+	const LIBRARYC3PO_URL= "http://localhost:3080",
+		  API_URL = LIBRARYC3PO_URL + '/api',
+		  BOOKS_API_URL= API_URL + '/book',
+		  INDEX_API_URL= API_URL + '/',
+		  REMOVE_BOOK  = BOOKS_API_URL + '/remove',
+		  UPDATE_BOOK  = BOOKS_API_URL + '/update',
+		  ALL_BOOKS_URL= BOOKS_API_URL+ '/library',
+		  ADD_BOOK = BOOKS_API_URL + '/add';
 
 	app.constant("URL", {
 		SERVER_URL: LIBRARYC3PO_URL,
+		BOOKS_API_URL: BOOKS_API_URL,
+		INDEX_API_URL: INDEX_API_URL,
 		ALL_BOOKS_URL: ALL_BOOKS_URL,
 		REMOVE_BOOK : REMOVE_BOOK,
+		UPDATE_BOOK: UPDATE_BOOK,
 		ADD_BOOK: ADD_BOOK
 	});
 })();

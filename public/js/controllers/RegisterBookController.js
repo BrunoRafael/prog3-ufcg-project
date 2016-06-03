@@ -17,23 +17,23 @@ app.controller('RegisterBookCtrl', function($rootScope, $scope, $mdDialog, BookS
 			}
 			bookCopy.authors[i] = bookCopy.authors[i].trim();
 		}
-		data.execute(bookCopy).then( function() {
+		data.execute(bookCopy).then( function(json) {
 			$scope.close();
 			$mdDialog.show(
 					$mdDialog.alert()
 							.parent(angular.element(document.querySelector('#popupContainer')))
 							.title('Sucesso!')
-							.textContent('Informações salvas com sucesso.')
+							.textContent(json.data.msg)
 							.targetEvent(ev)
 							.ok('Fechar'));
 			$rootScope.$broadcast('bookSaved', [bookCopy]);
-		}).catch( function(exception){
+		}).catch( function(json){
 			$scope.close();
 			$mdDialog.show(
 					$mdDialog.alert()
 							.parent(angular.element(document.querySelector('#popupContainer')))
 							.title('Erro')
-							.textContent('Não foi possível salvar os dados.')
+							.textContent(json.data.msg)
 							.targetEvent(ev)
 							.ok('Fechar')
 			);

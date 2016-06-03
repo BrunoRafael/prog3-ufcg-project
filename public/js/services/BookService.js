@@ -14,27 +14,27 @@
 				url: URL.ALL_BOOKS_URL,
 				crossDomain: true,
 				dataType: 'json',
-				success: function(data) {
-					successCallback(data)
+				success: function(response) {
+					successCallback(response.data)
 				},
 				error: function (ex) {
 					if(errorCallback){
-						errorCallback(ex)
+						errorCallback(response.data)
 					}
 				}
 			});
 		}
 
-		function save(book, successCallback, errorCallback){
+		function save(book){
 			return $http.post(URL.ADD_BOOK, {book: book});
 		}
 
 		function remove(bookId){
-			return $http.delete(URL.REMOVE_BOOK + '/' + bookId);
+			return $http.delete(URL.REMOVE_BOOK, {params: {bookId: bookId}});
 		}
 
 		function update(newBook){
-			return $http.put(URL.UPDATE_BOOK + '/book'), {book: newBook};
+			return $http.put(URL.UPDATE_BOOK, {book: newBook});
 		}
 
 		function addComment(bookId, comment){

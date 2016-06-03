@@ -8,10 +8,12 @@ app.controller('BookCtrl', function($rootScope, $scope, BookService){
 		BookService.add(book);
 	};
 
-	$scope.removeBookCallback = function(bookId){
+	$scope.removeBookCallback = function(book){
 		for(var i in $scope.books){
-			if(bookId == $scope.books[i].bookId){
+			if(book._id == $scope.books[i]._id){
 				$scope.books.splice(i, 1);
+				$scope.$applyAsync();
+				break;
 			}
 		}
 	};

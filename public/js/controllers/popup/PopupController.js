@@ -9,14 +9,14 @@ app.controller('PopupCtrl', function($scope, $mdDialog, BookService){
           .cancel('Cancelar');
 
 
-    $mdDialog.show(confirm).then(function() {
-      console.log('removed!');
-      BookService.remove(bookId).then(function(id){
-        console.log(id);
-        removeBookCallback(bookId);
-      }).catch(function(exception){
-          console.log('error');
-        });
+        $mdDialog.show(confirm).then(function() {
+          console.log('removed!');
+          BookService.remove(bookId).then(function(json){
+            console.log(json);
+            removeBookCallback(json.data.data);
+          }).catch(function(exception){
+              console.log(exception.message);
+          });
 
     }, function() {
       console.log('canceled!');
@@ -35,8 +35,10 @@ app.controller('PopupCtrl', function($scope, $mdDialog, BookService){
             parent: angular.element(document.body),
             targetEvent: ev,
             locals:{
-                book: undefined,
-                execute: BookService.save
+               data:{
+                   book: undefined,
+                   execute: BookService.save
+               }
             }
         });
     };
