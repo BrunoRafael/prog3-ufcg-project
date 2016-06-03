@@ -6,17 +6,23 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var config = require('./config');
 var path = require('path');
+var url_conn = '';
 
 if (process.env.PORT) {
-    mongoose.connect(config.mongo_uri.heroku);
+    url_conn = config.mongo_uri.heroku;
+    mongoose.connect(url_conn);
 } else if (process.env.NODE_ENV == 'test') {
-    mongoose.connect(config.mongo_uri.test);
+    url_conn = config.mongo_uri.test;
+    mongoose.connect(url_conn);
 } else {
-    mongoose.connect(config.mongo_uri.dev);
+    url_conn = config.mongo_uri.dev;
+    mongoose.connect(url_conn);
 }
 
 var db = mongoose.connection;
-db.once('open', console.error.bind(console, 'Conexao com banco de dados aberta com: '));
+
+db.on('error', console.error.bind(console, 'Erro ao conectar no banco de dados'));
+db.once('open', console.error.bind(console, 'Conexao com banco de dados aberta com: ' + url_conn));
 
 app.use(express.static(__dirname + '/public'));
 app.use(cors());
