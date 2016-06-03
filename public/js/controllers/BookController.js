@@ -18,9 +18,21 @@ app.controller('BookCtrl', function($rootScope, $scope, BookService){
 		}
 	};
 
-	$rootScope.$on('bookSaved', function(status,books){
-		for(var i in books){
-			$scope.books.unshift(books[i]);
+	$rootScope.$on('bookSaved', function(status,json){
+		for(var i in json) {
+			$scope.books.unshift(json[i].data);
+		}
+	});
+
+	$rootScope.$on('bookUpdated', function(status, array){
+		for(var i in array){
+			for(var j in $scope.books){
+				if(array[i].data._id == $scope.books[j]._id) {
+					$scope.books[j] = array[i].data;
+					$scope.$applyAsync();
+				}
+			}
+
 		}
 	});
 });

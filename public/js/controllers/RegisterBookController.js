@@ -1,8 +1,4 @@
 app.controller('RegisterBookCtrl', function($rootScope, $scope, $mdDialog, BookService, data){
-	$scope.close = function(){
-		$mdDialog.cancel();
-	};
-
 	$scope.book = data.book ? data.book : {};
 
 	$scope.save = function(ev, book){
@@ -17,17 +13,7 @@ app.controller('RegisterBookCtrl', function($rootScope, $scope, $mdDialog, BookS
 			}
 			bookCopy.authors[i] = bookCopy.authors[i].trim();
 		}
-		data.execute(bookCopy).then( function(json) {
-			$scope.close();
-			$mdDialog.show(
-					$mdDialog.alert()
-							.parent(angular.element(document.querySelector('#popupContainer')))
-							.title('Sucesso!')
-							.textContent(json.data.msg)
-							.targetEvent(ev)
-							.ok('Fechar'));
-			$rootScope.$broadcast('bookSaved', [bookCopy]);
-		}).catch( function(json){
+		data.execute(bookCopy).then(data.callback).catch( function(json){
 			$scope.close();
 			$mdDialog.show(
 					$mdDialog.alert()
@@ -38,5 +24,9 @@ app.controller('RegisterBookCtrl', function($rootScope, $scope, $mdDialog, BookS
 							.ok('Fechar')
 			);
 		});
-	}
+	};
+
+	$scope.close = function(){
+		$mdDialog.cancel();
+	};
 });

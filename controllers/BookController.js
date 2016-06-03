@@ -59,7 +59,7 @@ exports.remove = function(bookId, callback){
 };
 
 exports.update = function(newBook, callback){
-    Book.findOneAndUpdate({_id: newBook._id}, newBook, {new: true}, function(err, bookSaved){
+    Book.findOneAndUpdate({_id: newBook._id}, newBook, function(err, bookSaved){
         if(err){
             callback({success: true, data: err, msg: 'Não foi possível atualizar as informações'});
         }else {

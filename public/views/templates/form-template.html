@@ -4,20 +4,22 @@
   <md-content class="md-no-momentum">
     <md-input-container class="md-icon-float md-block">
       <label>Código (obrigatório)</label>
-      <input ng-model="book.code" type="text" ng-required="true">
+      <input ng-model="book.code" type="text" ng-required="true" placeholder="Código do livro(deve ser único)">
     </md-input-container>
     <md-input-container class="md-icon-float md-block">
       <label>Título (obrigatório)</label>
       <input ng-model="book.title" type="text" ng-required="true">
     </md-input-container>
     <md-input-container md-no-float class="md-block">
-      <input ng-model="book.authors" type="text" placeholder="Autores">
+      <label>Autores</label>
+      <input ng-model="book.authors" type="text" placeholder="Escreva o nome dos autores do livro">
     </md-input-container>
     <md-input-container class="md-block">
       <label>Preço (obrigatório)</label>
       <input ng-model="book.price" type="text" ng-required="true">
     </md-input-container>
     <md-input-container md-no-float class="md-block">
+      <label>Url da imagem</label>
       <input ng-model="book.imgUrl" type="text" placeholder="Url para a capa do livro" >
     </md-input-container>
     <md-input-container class="md-icon-float md-icon-right md-block">

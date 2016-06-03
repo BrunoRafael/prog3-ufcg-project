@@ -1,27 +1,28 @@
-app.controller('PopupCtrl', function($scope, $mdDialog, BookService){
+app.controller('PopupCtrl', function($scope, $rootScope, $mdDialog, BookService){
 
 	$scope.showConfirm = function(ev, bookId, removeBookCallback) {
-	    var confirm = $mdDialog.confirm()
-          .title('Deseja realmente remover esse livro?')
-          .textContent('O livro será removido e não poderá ser recuperado')
-          .targetEvent(ev)
-          .ok('Confirmar')
-          .cancel('Cancelar');
+        var confirm = $mdDialog.confirm()
+            .title('Deseja realmente remover esse livro?')
+            .textContent('O livro será removido e não poderá ser recuperado')
+            .targetEvent(ev)
+            .ok('Confirmar')
+            .cancel('Cancelar');
 
 
-        $mdDialog.show(confirm).then(function() {
-          console.log('removed!');
-          BookService.remove(bookId).then(function(json){
-            console.log(json);
-            removeBookCallback(json.data.data);
-          }).catch(function(exception){
-              console.log(exception.message);
-          });
+        $mdDialog.show(confirm).then(function () {
+            console.log('removed!');
+            BookService.remove(bookId).then(function (json) {
+                console.log(json);
+                removeBookCallback(json.data.data);
+            }).catch(function () {
+                console.log(exception.message);
+            });
 
-    }, function() {
-      console.log('canceled!');
-    });
-  };
+        }, function () {
+            console.log('canceled');
+        });
+    };
+
 
     /*
      locals: {
@@ -37,13 +38,19 @@ app.controller('PopupCtrl', function($scope, $mdDialog, BookService){
             locals:{
                data:{
                    book: undefined,
-                   execute: BookService.save
+                   execute: BookService.save,
+                   callback: function(json) {
+                       $mdDialog.cancel();
+                       showFormPopup(ev, json);
+                       $rootScope.$broadcast('bookSaved', [json.data]);
+                   }
                }
             }
         });
     };
 
-    $scope.showUpdateBook = function(ev, book, callback){
+    $scope.showUpdateBook = function(ev, book){
+
         $mdDialog.show({
             controller: 'RegisterBookCtrl',
             templateUrl: '../../../views/templates/form-template.html',
@@ -51,10 +58,25 @@ app.controller('PopupCtrl', function($scope, $mdDialog, BookService){
             targetEvent: ev,
             locals:{
                 data:{
-                    book: book,
-                    execute : BookService.update
+                    book: angular.copy(book),
+                    execute : BookService.update,
+                    callback: function(json) {
+                        $mdDialog.cancel();
+                        showFormPopup(ev, json);
+                        $rootScope.$broadcast('bookUpdated', [json.data]);
+                    }
                 }
             }
         });
     };
+
+    function showFormPopup(ev, json){
+        $mdDialog.show(
+            $mdDialog.alert()
+                .parent(angular.element(document.querySelector('#popupContainer')))
+                .title('Sucesso!')
+                .textContent(json.data.msg)
+                .targetEvent(ev)
+                .ok('Fechar'));
+    }
 });
